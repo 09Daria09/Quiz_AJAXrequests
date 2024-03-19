@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Тест по JavaScript</title>
+<style>
+  body {
+    background-color: #121212;
+    color: #e0e0e0; 
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #js-test-form {
+    width: 90%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  .question-block {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: #ff5555; 
+  }
+
+  label {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  button {
+    background-color: #ff5555; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  button:hover {
+    background-color: #ff4444;
+  }
+
+  p {
+    color: #a0a0a0; 
+  }
+</style>
+
+</head>
+<body>
+    <form id="js-test-form">
+        <button type="button" id="next-question-button">Следующий вопрос</button>
+        <button type="button" id="submit-answer-button">Ответить</button>
+        <p id="time-left">Осталось: <span id="timer">30</span> секунд</p>
+      </form>
+      
+  
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  let currentQuestion = 1;
+  let correctAnswerCount = 0;
+  let questionsData = [];
+  const totalQuestions = 12;
+
+  function createQuestionElement(question) {
+    const questionBlock = $('<div>', { 'id': `question-${question.id}`, 'class': 'question-block' });
+    const questionTitle = $('<h2>').text(`${question.question}`);
+    questionBlock.append(questionTitle);
+    
+    question.options.forEach((option) => {
+      const label = $('<label>');
+      const inputType = question.type === 'checkbox' ? 'checkbox' : 'radio';
+      const input = $('<input>', { type: inputType, name: `answers-${question.id}`, value: option.value });
+      label.append(input, option.text);
+      questionBlock.append(label);
+    });
+
+    if(question.id !== 1) questionBlock.hide();
+    
+    $('#js-test-form').prepend(questionBlock);
+  }
+
+  function loadQuestions() {
+    $.getJSON('questions.json', function(data) {
+      questionsData = data;
+      data.forEach(createQuestionElement);
+    }).fail(function() {
+      console.log('Ошибка при загрузке вопросов.');
+    });
+  }
+
+  $(document).ready(function() {
+    loadQuestions();
+  });
+
+  function nextQuestion() {
+    if (currentQuestion < totalQuestions) {
+      $(`#question-${currentQuestion}`).hide();
+      currentQuestion++;
+      $(`#question-${currentQuestion}`).show();
+      restartTimer();
+    } else {
+      showResults();
+    }
+  }
+
+  function checkAnswers() {
+    const question = questionsData[currentQuestion - 1];
+    const userAnswers = $(`input[name='answers-${currentQuestion}']:checked`).map(function() {
+      return this.value;
+    }).get();
+    const correctOptions = question.correct;
+    
+    let isCorrect = false;
+    if(question.type === 'radio') {
+      isCorrect = userAnswers.length === 1 && correctOptions.includes(userAnswers[0]);
+    } else {
+      isCorrect = correctOptions.sort().join(',') === userAnswers.sort().join(',');
+    }
+    
+    if (isCorrect) {
+      correctAnswerCount++;
+    }
+    nextQuestion();
+  }
+
+  function startTimer(duration, display) {
+    let timer = duration;
+    clearInterval(window.currentInterval);
+    window.currentInterval = setInterval(function() {
+      display.textContent = parseInt(timer % 60, 10);
+      if (--timer < 0) {
+        clearInterval(window.currentInterval);
+        alert('Время вышло!');
+        nextQuestion();
+      }
+    }, 1000);
+  }
+
+  function restartTimer() {
+    const timeLeftDisplay = $('#timer');
+    startTimer(30, timeLeftDisplay[0]);
+  }
+
+  function showResults() {
+    alert(`Вы ответили правильно на ${correctAnswerCount} из ${totalQuestions} вопросов.`);
+    if (confirm("Хотите ли вы повторить тест?")) {
+      restartTest();
+    }
+  }
+
+  function restartTest() {
+    correctAnswerCount = 0;
+    currentQuestion = 1;
+    $('.question-block').hide();
+    $(`#question-1`).show();
+    restartTimer();
+  }
+
+  $(document).on('click', '#next-question-button', nextQuestion);
+  $(document).on('click', '#submit-answer-button', checkAnswers);
+  $(window).on('load', restartTimer);
+</script>
+
+  </body>
+</html>

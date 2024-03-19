@@ -1,0 +1,147 @@
+[
+    {
+      "id": 1,
+      "question": "Вопрос №1 из 12: Для чего можно использовать JavaScript?",
+      "options": [
+        {"text": "Для создания самостоятельной исполняемой программы", "value": "create_program"},
+        {"text": "Для обработки событий на web-странице", "value": "event_handling"},
+        {"text": "Для добавления динамики и 'интеллекта' в web-страницу", "value": "add_dynamics"},
+        {"text": "Все варианты верны", "value": "all_correct"}
+      ],
+      "type": "radio",
+      "correct": ["all_correct"]
+    },
+    {
+        "id": 2,
+        "question": "Вопрос №2 из 12: Какой синтаксис используется для создания функции в JavaScript?",
+        "options": [
+            {"text": "function:myFunction() {}", "value": "function_myFunction"},
+            {"text": "function myFunction() {}", "value": "function myFunction"},
+            {"text": "function = myFunction() {}", "value": "function_equals"},
+            {"text": "function::myFunction() {}", "value": "function_colon"}
+        ],
+        "type": "radio",
+        "correct": ["function myFunction"]
+    },
+    {
+        "id": 3,
+        "question": "Вопрос №3 из 12: Что делает оператор ===?",
+        "options": [
+            {"text": "Сравнивает и значения, и типы, без преобразования типов", "value": "compares_values_types"},
+            {"text": "Сравнивает только значения, преобразуя типы", "value": "compares_values"},
+            {"text": "Присваивает значение", "value": "assigns_value"},
+            {"text": "Ничего из вышеперечисленного", "value": "none_of_above"}
+        ],
+        "type": "radio",
+        "correct": ["compares_values_types"]
+    },
+    {
+        "id": 4,
+        "question": "Вопрос №4 из 12: Какие ключевые слова используются в JavaScript?",
+        "options": [
+            {"text": "var", "value": "var"},
+            {"text": "let", "value": "let"},
+            {"text": "const", "value": "const"},
+            {"text": "if", "value": "if"},
+            {"text": "for", "value": "for"}
+        ],
+        "type": "checkbox",
+        "correct": ["var", "let", "const", "if", "for"]
+    },
+    {
+        "id": 5,
+        "question": "Вопрос №5 из 12: Какой метод массива добавляет элемент в конец массива?",
+        "options": [
+            {"text": "unshift()", "value": "unshift"},
+            {"text": "shift()", "value": "shift"},
+            {"text": "push()", "value": "push"},
+            {"text": "pop()", "value": "pop"}
+        ],
+        "type": "radio",
+        "correct": ["push"]
+    },
+    {
+        "id": 6,
+        "question": "Вопрос №6 из 12: Что возвращает метод Array.prototype.map()?",
+        "options": [
+            {"text": "Модифицирует исходный массив и возвращает его", "value": "modifies_array"},
+            {"text": "Новый массив, содержащий результаты вызова функции для каждого элемента", "value": "new_array"},
+            {"text": "Количество элементов в массиве", "value": "element_count"},
+            {"text": "Первый элемент массива", "value": "first_element"}
+        ],
+        "type": "radio",
+        "correct": ["new_array"]
+    },
+    {
+      "id": 7,
+      "question": "Вопрос №7 из 12: Какой объект в JavaScript представляет глобальную область видимости?",
+      "options": [
+        {"text": "Document", "value": "document"},
+        {"text": "Window", "value": "window"},
+        {"text": "Global", "value": "global"},
+        {"text": "This", "value": "this"}
+      ],
+      "type": "radio",
+      "correct": ["window"]
+    },
+    {
+      "id": 8,
+      "question": "Вопрос №8 из 12: Какие из этих инструкций используются для управления потоком выполнения в JavaScript?",
+      "options": [
+        {"text": "if","value": "if" },
+        {"text": "for","value": "for"},
+        {"text": "while","value": "while"},
+        {"text": "try...catch", "value": "try_catch"}
+      ],
+      "type": "checkbox",
+      "correct": ["if", "for", "while", "try_catch"]
+    },
+    {
+        "id": 9,
+        "question": "Вопрос №9 из 12: Что такое замыкание в JavaScript?",
+        "options": [
+            {"text": "Объект, закрывающий доступ к своим методам", "value": "object_closure"},
+            {"text": "Функция вместе со всеми внешними переменными, которые ей доступны", "value": "function_scope"},
+            {"text": "Конструкция для закрытия текущего блока кода", "value": "code_block"},
+            {"text": "Паттерн проектирования", "value": "design_pattern"}
+        ],
+        "type": "radio",
+        "correct": ["function_scope"]
+    },
+    {
+        "id": 10,
+        "question": "Вопрос №10 из 12: Какой метод используется для преобразования JSON в объект JavaScript?",
+        "options": [
+            {"text": "JSON.stringify()", "value": "stringify"},
+            {"text": "JSON.parse()", "value": "parse"},
+            {"text": "JSON.toObject()", "value": "toObject"},
+            {"text": "JSON.toJS()", "value": "toJS"}
+        ],
+        "type": "radio",
+        "correct": ["parse"]
+    },
+    {
+      "id": 11,
+      "question": "Вопрос №11 из 12: Что такое Promise в JavaScript?",
+      "options": [
+        { "text": "Функция обратного вызова для асинхронных операций", "value": "callback"},
+        {"text": "Объект, представляющий завершение (или провал) асинхронной операции и её результат", "value": "async_result"},
+        {"text": "Способ организации циклов", "value": "loop_method" },
+        {"text": "Переменная, хранящая временное значение", "value": "temp_variable" }
+      ],
+      "type": "radio",
+      "correct": ["async_result"]
+    },
+    {
+      "id": 12,
+      "question": "Вопрос №12 из 12: Какой оператор используется для определения типа переменной в JavaScript?",
+      "options": [
+        {"text": "typeof()","value": "typeof_function" },
+        {"text": "typeof","value": "typeof_operator"},
+        {"text": "type()", "value": "type_function"},
+        {"text": "getType()","value": "getType" }
+      ],
+      "type": "radio",
+      "correct": [ "typeof_operator"]
+    }
+  ]
